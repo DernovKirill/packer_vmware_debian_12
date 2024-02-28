@@ -1,0 +1,28 @@
+{
+  "variables": {
+    "version": ""
+  },
+  "builders": [
+    {
+      "type": "vmware-iso",
+	  "boot_command": ["<wait><esc><wait>auto preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg netcfg/get_hostname={{ .Name }}<enter>"],
+      "boot_wait": "10s",
+      "disk_size": 20480,
+	  "cpus": 2,
+	  "memory": 2048,
+      "guest_os_type": "debian12_64Guest",
+      "headless": true,
+      "http_directory": "http",
+      "iso_urls": [
+        "https://cdimage.debian.org/cdimage/archive/12.1.0/amd64/iso-cd/debian-12.1.0-amd64-netinst.iso"
+      ],
+      "iso_checksum": "sha256:9f181ae12b25840a508786b1756c6352a0e58484998669288c4eec2ab16b8559",
+      "ssh_username": "user",
+      "ssh_password": "12345678",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '12345678'|sudo -S shutdown -P now",
+      "vm_name": "packer-debian-12-amd64"
+    }
+  ]
+}
